@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: providers
+  labels:
+    app: nats-providers
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: provider
+  template:
+    metadata:
+      labels:
+        app: provider
+    spec:
+      containers:
+        - name: provider
+          image: florian74/nats-provider:latest
+          command:
+            - 'main'
+            - '-url'
+            - 'nats://nats-service.default.svc.cluster.local:4222'
+            - '-name'
+            - 'P1'

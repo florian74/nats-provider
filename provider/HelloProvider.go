@@ -32,6 +32,8 @@ func (provider *HelloProvider) Connect(
 ) {
 	var err error
 
+	fmt.Printf("nats url is %s\n", url)
+
 	provider.name = providerName
 	provider.queue = queueName
 	provider.subject = subject
@@ -43,10 +45,11 @@ func (provider *HelloProvider) Connect(
 	}
 
 	if reply != "" {
-		_, err := provider.natsConn.Subscribe(reply, provider.OnReply)
+		sub, err := provider.natsConn.Subscribe(reply, provider.OnReply)
 		if err != nil {
 			fmt.Printf("Could not read reply")
 		}
+		defer sub.Unsubscribe()
 	}
 
 	if !jetStream {

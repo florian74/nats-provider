@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nats-server
+  labels:
+    app: nats-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nats-app
+  template:
+    metadata:
+      labels:
+        app: nats-app
+    spec:
+      containers:
+        - name: nats-server
+          image: nats:0.8.0
+          ports:
+            - containerPort: 4222
+            - containerPort: 6222
+            - containerPort: 8222
