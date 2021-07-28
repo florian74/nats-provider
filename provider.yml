@@ -20,6 +20,6 @@ spec:
           command:
             - 'main'
             - '-url'
-            - 'nats://nats-service.default.svc.cluster.local:4222'
+            - 'nats://nats-service:4222'
             - '-name'
             - 'P1'

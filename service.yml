@@ -10,11 +10,11 @@ spec:
       protocol: TCP
     - port: 8222
       name: nats-http
-      targetPort: 6222
+      targetPort: 8222
       protocol: TCP
     - port: 6222
       name: nats-route
       targetPort: 6222
       protocol: TCP
   selector:
-      name: nats-services
+      app: nats-app
